@@ -7,6 +7,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E43E43E0-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.Domain", "ShopApp.Domain\ShopApp.Domain.csproj", "{032D092A-87BE-4D72-8A50-344831E94373}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrestructure", "Infrestructure", "{D03D87A0-2EF0-465E-954A-B6B76FDAA8F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOC", "IOC", "{FC911BAA-20CD-4DDD-A72A-9FE545B3D12F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{26C0C98E-C48C-4969-A0AD-8954BDBE0B02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{DD400D0C-47CE-4694-AB6C-A4D375F4979C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{76AC909F-A256-4D50-A078-873DC16B58E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.Application", "ShopApp.Application\ShopApp.Application.csproj", "{C24166E7-CE59-4E81-A601-8DED239C7BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.Percistence", "ShopApp.Percistence\ShopApp.Percistence.csproj", "{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +31,21 @@ Global
 		{032D092A-87BE-4D72-8A50-344831E94373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032D092A-87BE-4D72-8A50-344831E94373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032D092A-87BE-4D72-8A50-344831E94373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24166E7-CE59-4E81-A601-8DED239C7BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24166E7-CE59-4E81-A601-8DED239C7BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24166E7-CE59-4E81-A601-8DED239C7BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24166E7-CE59-4E81-A601-8DED239C7BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{032D092A-87BE-4D72-8A50-344831E94373} = {E43E43E0-0705-4B98-8101-596A4338E283}
+		{C24166E7-CE59-4E81-A601-8DED239C7BB9} = {E43E43E0-0705-4B98-8101-596A4338E283}
+		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98} = {D03D87A0-2EF0-465E-954A-B6B76FDAA8F5}
 	EndGlobalSection
 EndGlobal
