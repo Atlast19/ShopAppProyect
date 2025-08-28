@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ShopApp.Domain\ShopApp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Base\" />
+  </ItemGroup>
+
 </Project>
