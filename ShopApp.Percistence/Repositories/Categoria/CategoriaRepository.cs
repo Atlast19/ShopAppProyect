@@ -1,7 +1,5 @@
 ﻿
 
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using ShopApp.Domain.Base;
@@ -12,14 +10,16 @@ namespace ShopApp.Percistence.Repositories.Categoria
 {
     public class CategoriaRepository : ICategoriaRepository
     {
+        private readonly IAbstraerCode _abstraerCode;
         private readonly IConfiguration _configuration;
         private readonly ILogger<CategoriaRepository> _logger;
         private readonly string _connectionString;
 
 
-        public CategoriaRepository(IConfiguration configuration, ILogger<CategoriaRepository> logger)
+        public CategoriaRepository(IConfiguration configuration,IAbstraerCode abstraerCode, ILogger<CategoriaRepository> logger)
         {
             _configuration = configuration;
+            _abstraerCode = abstraerCode;
             _logger = logger;
             _connectionString = _configuration.GetConnectionString("StringConection");
         }
@@ -33,51 +33,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
             {
                 // abstraer las respectivas validaciones
                 _logger.LogInformation($"Creando una Categoria: {model.categoryname}");
-
-
-                using (var connection = new SqlConnection(_connectionString)) 
-                {
-                    using (var command = new SqlCommand("SP_AgregarCategoria", connection)) 
-                    {
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@categoryname",model.categoryname);
-                        command.Parameters.AddWithValue("@description", model.description);
-                        command.Parameters.AddWithValue("@creation_user", model.creation_user);
-
-                        SqlParameter v_result = new SqlParameter("@result", System.Data.SqlDbType.VarChar)
-                        {
-                            Size = 100,
-                            Direction = System.Data.ParameterDirection.Output
-
-                        };
-
-                        command.Parameters.Add(v_result);
-
-                        await connection.OpenAsync();
-
-                        var RowAffected = await command.ExecuteNonQueryAsync();
-                        var resultMessage = v_result.Value.ToString();
-
-                        if (RowAffected > 0)
-                        {
-                            _logger.LogInformation($"Categoria {model.categoryname} creada satisfactoriamente. Resultado:{resultMessage} ");
-                            var CategoriaCreateModel = new CategoriaCreateModel
-                            {
-                                categoryname = model.categoryname,
-                                description = model.description,
-                                creation_user = model.creation_user
-                            };
-                            result = OperationResult<CategoriaCreateModel>.Succes("Categoria creada", CategoriaCreateModel);
-                        }
-                        else 
-                        {
-                            _logger.LogInformation($"No se ha podido crear la categoria {model.categoryname}. Resultado{resultMessage}");
-                            result = OperationResult<CategoriaCreateModel>.Failure("no se ha podido crear la categoria");
-
-                        }
-                    }
-
-                }
+               return await _abstraerCode.AbstractCodeModel(_connectionString, model);
             }
             catch (Exception ex) 
             {
