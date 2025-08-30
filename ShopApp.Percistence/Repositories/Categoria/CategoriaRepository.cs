@@ -26,7 +26,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
         public async Task<OperationResult<CategoriaCreateModel>> CreateCategoriaAsync(CategoriaCreateModel model)
         {
-            
+
             OperationResult<CategoriaCreateModel> result = new OperationResult<CategoriaCreateModel>();
 
             try
@@ -85,6 +85,21 @@ namespace ShopApp.Percistence.Repositories.Categoria
                 result = OperationResult<CategoriaCreateModel>.Failure($"Error Creando la Categoria {ex.Message}");
             }
             return result;
+        }
+
+        public Task<OperationResult<CategoriaDeleteModel>> DeleteCategoriaByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<OperationResult<CategoriaGetModel>> GetAllCategoriaAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<OperationResult<CategoriaGetModel>> GetCategoriaByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
