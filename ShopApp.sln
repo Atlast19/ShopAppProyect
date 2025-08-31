@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E43E43E0-0705-4B98-8101-596A4338E283}"
 EndProject
@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.Application", "Shop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.Percistence", "ShopApp.Percistence\ShopApp.Percistence.csproj", "{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp.pressent", "ShopApp.pressent\ShopApp.pressent.csproj", "{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,5 +53,6 @@ Global
 		{032D092A-87BE-4D72-8A50-344831E94373} = {E43E43E0-0705-4B98-8101-596A4338E283}
 		{C24166E7-CE59-4E81-A601-8DED239C7BB9} = {E43E43E0-0705-4B98-8101-596A4338E283}
 		{A065F4B2-1629-4BA0-B8EF-15B90AA8ED98} = {D03D87A0-2EF0-465E-954A-B6B76FDAA8F5}
+		{4EF3F59A-D1AC-43B0-9B4E-BC72C8DE2A4A} = {DD400D0C-47CE-4694-AB6C-A4D375F4979C}
 	EndGlobalSection
 EndGlobal

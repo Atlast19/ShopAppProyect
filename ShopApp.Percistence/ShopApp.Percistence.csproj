@@ -18,6 +18,13 @@
 
   <ItemGroup>
     <Folder Include="Repositories\Base\" />
+    <Folder Include="Repositories\Customers\" />
+    <Folder Include="Repositories\Employees\" />
+    <Folder Include="Repositories\OrderDetails\" />
+    <Folder Include="Repositories\Order\" />
+    <Folder Include="Repositories\Products\" />
+    <Folder Include="Repositories\Shippers\" />
+    <Folder Include="Repositories\Suppliers\" />
   </ItemGroup>
 
 </Project>

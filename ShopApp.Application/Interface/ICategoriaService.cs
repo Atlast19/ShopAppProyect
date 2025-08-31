@@ -1,14 +1,15 @@
-﻿using ShopApp.Domain.Base;
+﻿
+using ShopApp.Domain.Base;
 using ShopApp.Domain.Models.Categoria;
 
-namespace ShopApp.Domain.Interface.Categoria
+namespace ShopApp.Application.Interface
 {
-    public interface ICategoriaRepository
+    public interface ICategoriaService
     {
         Task<OperationResult<CategoriaCreateModel>> CreateCategoriaAsync(CategoriaCreateModel model);
         Task<OperationResult<List<CategoriaGetModel>>> GetAllCategoriaAsync();
         Task<OperationResult<CategoriaGetModel>> GetCategoriaByIdAsync(int id);
-        Task<OperationResult<CategoriaDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user);
+        Task<OperationResult<CategoriaDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user); // sin implementar
         Task<OperationResult<CategoriaUpdateModel>> UpdateCategoria(CategoriaUpdateModel model);
     }
 }

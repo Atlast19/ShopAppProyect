@@ -7,6 +7,6 @@ namespace ShopApp.Domain.Interface.Categoria
 {
     public interface IAbstraerCode
     {
-        Task<OperationResult<CategoriaCreateModel>> AbstractCodeModel(string conectionString,CategoriaCreateModel model);
+        //Task<OperationResult<CategoriaCreateModel>> AbstractCodeModel(string conectionString,CategoriaCreateModel model);
     }
 }

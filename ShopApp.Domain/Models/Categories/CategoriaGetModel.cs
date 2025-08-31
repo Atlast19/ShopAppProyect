@@ -6,6 +6,7 @@ namespace ShopApp.Domain.Models.Categoria
 {
     public record CategoriaGetModel : CategoriaModel
     {
-        public DateTime Create_date { get; set; }
+        public DateTime creation_date { get; set; }
+        public int creation_user  { get; set; }
     }
 }
