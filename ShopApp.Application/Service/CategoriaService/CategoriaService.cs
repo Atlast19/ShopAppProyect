@@ -4,7 +4,7 @@ using ShopApp.Domain.Base;
 using ShopApp.Domain.Interface.Categoria;
 using ShopApp.Domain.Models.Categoria;
 
-namespace ShopApp.Application.Service
+namespace ShopApp.Application.Service.CategoriaService
 {
     public class CategoriaService : ICategoriaService
     {
@@ -21,7 +21,7 @@ namespace ShopApp.Application.Service
 
         public async Task<OperationResult<CategoriaDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user)
         {
-           return await _categoriaRepository.DeleteCategoriaByIdAsync(id, delete_user);
+            return await _categoriaRepository.DeleteCategoriaByIdAsync(id, delete_user);
         } // sin implementar
 
         public async Task<OperationResult<List<CategoriaGetModel>>> GetAllCategoriaAsync()

@@ -1,6 +1,6 @@
 
 using ShopApp.Application.Interface;
-using ShopApp.Application.Service;
+using ShopApp.Application.Service.CategoriaService;
 using ShopApp.Domain.Interface.Categoria;
 using ShopApp.Percistence.Repositories.Categoria;
 
