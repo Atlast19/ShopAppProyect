@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopApp.Application.Interface;
+using ShopApp.Application.Interface.Categoria;
 using ShopApp.Domain.Models.Categoria;
 
 namespace ShopApp.pressent.Controllers

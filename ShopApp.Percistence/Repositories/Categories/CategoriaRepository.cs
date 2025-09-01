@@ -1,12 +1,9 @@
-﻿
-
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using ShopApp.Domain.Base;
 using ShopApp.Domain.Interface.Categoria;
 using ShopApp.Domain.Models.Categoria;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ShopApp.Percistence.Repositories.Categoria
 {
@@ -58,7 +55,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
                         if (RowAffected > 0)
                         {
-                            _logger.LogInformation($"Categoria {model.categoryname} creada satisfactoriamente. Resultado:{resultMessage} ");
+                            _logger.LogInformation($"Categoria {model.categoryname} creada satisfactoriamente. Resultado: {resultMessage} ");
                             var CategoriaCreateModel = new CategoriaCreateModel
                             {
                                 categoryname = model.categoryname,

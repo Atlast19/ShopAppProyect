@@ -1,8 +1,7 @@
-﻿
-using ShopApp.Domain.Base;
+﻿using ShopApp.Domain.Base;
 using ShopApp.Domain.Models.Categoria;
 
-namespace ShopApp.Application.Interface
+namespace ShopApp.Application.Interface.Categoria
 {
     public interface ICategoriaService
     {

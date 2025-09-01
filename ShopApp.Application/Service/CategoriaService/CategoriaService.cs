@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using ShopApp.Application.Interface;
+using ShopApp.Application.Interface.Categoria;
 using ShopApp.Domain.Base;
 using ShopApp.Domain.Interface.Categoria;
 using ShopApp.Domain.Models.Categoria;
@@ -22,7 +22,7 @@ namespace ShopApp.Application.Service.CategoriaService
         public async Task<OperationResult<CategoriaDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user)
         {
             return await _categoriaRepository.DeleteCategoriaByIdAsync(id, delete_user);
-        } // sin implementar
+        } 
 
         public async Task<OperationResult<List<CategoriaGetModel>>> GetAllCategoriaAsync()
         {
