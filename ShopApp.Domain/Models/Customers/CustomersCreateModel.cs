@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Customers.CustomersBaseModel;
+
 namespace ShopApp.Domain.Models.Customers
 {
-    internal class CustomersCreateModel
+    public record CustomersCreateModel : CustomersModel
     {
+        public int creation_user { get; set; }
     }
 }

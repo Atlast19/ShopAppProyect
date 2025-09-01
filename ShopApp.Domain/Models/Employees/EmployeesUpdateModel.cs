@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Employees.EmployeesBaseModel;
+
 namespace ShopApp.Domain.Models.Employees
 {
-    internal class EmployeesUpdateModel
+    public record EmployeesUpdateModel : EmployeesModel
     {
+        public int modiffy_user { get; set; }
     }
 }

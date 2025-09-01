@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Employees.EmployeesBaseModel;
+
 namespace ShopApp.Domain.Models.Employees
 {
-    internal class EmployeesDeleteModel
+    public record EmployeesDeleteModel : EmployeesModel
     {
+        public int delete_user { get; set; }
     }
 }

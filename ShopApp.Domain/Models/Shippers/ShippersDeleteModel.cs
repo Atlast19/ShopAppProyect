@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Shippers.ShippersBaseModel;
+
 namespace ShopApp.Domain.Models.Shippers
 {
-    internal class ShippersDeleteModel
+    public record ShippersDeleteModel : ShippersModel
     {
+        public int delete_user { get; set; }
     }
 }

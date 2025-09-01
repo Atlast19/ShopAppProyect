@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Products.ProductsBaseModel;
+
 namespace ShopApp.Domain.Models.Products
 {
-    internal class ProductsDeleteModel
+    public record ProductsDeleteModel : ProductsModel
     {
+        public int delete_user { get; set; }
     }
 }

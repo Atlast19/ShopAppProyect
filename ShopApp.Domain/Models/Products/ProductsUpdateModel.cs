@@ -1,8 +1,11 @@
 ﻿
 
+using ShopApp.Domain.Models.Products.ProductsBaseModel;
+
 namespace ShopApp.Domain.Models.Products
 {
-    internal class ProductsUpdateModel
+    public record ProductsUpdateModel : ProductsModel
     {
+        public int modify_user { get; set; }
     }
 }

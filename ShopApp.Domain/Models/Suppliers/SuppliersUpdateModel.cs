@@ -1,7 +1,10 @@
 ﻿
+using ShopApp.Domain.Models.Suppliers.SuppliersBaseModel;
+
 namespace ShopApp.Domain.Models.Suppliers
 {
-    internal class SuppliersUpdateModel
+    public record SuppliersUpdateModel : SuppliersModel
     {
+        public int modify_user { get; set; }
     }
 }
