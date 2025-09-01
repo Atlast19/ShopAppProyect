@@ -1,6 +1,4 @@
-﻿
-
-using ShopApp.Domain.Base;
+﻿using ShopApp.Domain.Base;
 using ShopApp.Domain.Models.Customers;
 
 namespace ShopApp.Application.Interface.Customers
