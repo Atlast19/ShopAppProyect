@@ -1,7 +1,11 @@
 using ShopApp.Application.Interface.Categoria;
+using ShopApp.Application.Interface.Customers;
 using ShopApp.Application.Service.CategoriaService;
+using ShopApp.Application.Service.CustomerService;
 using ShopApp.Domain.Interface.Categoria;
+using ShopApp.Domain.Interface.Customers;
 using ShopApp.Percistence.Repositories.Categoria;
+using ShopApp.Percistence.Repositories.Customers;
 
 namespace ShopApp.pressent
 {
@@ -14,8 +18,10 @@ namespace ShopApp.pressent
             // Add services to the container.
 
             builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
 
             builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

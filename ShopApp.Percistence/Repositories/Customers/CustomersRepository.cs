@@ -19,7 +19,7 @@ namespace ShopApp.Percistence.Repositories.Customers
             _logger = logger;
             _connectionString = _configuration.GetConnectionString("StringConection");
         }
-        public async Task<OperationResult<CustomersCreateModel>> CreateCategoriaAsync(CustomersCreateModel model)
+        public async Task<OperationResult<CustomersCreateModel>> CreateCustmersAsync(CustomersCreateModel model)
         {
             OperationResult<CustomersCreateModel> result = new OperationResult<CustomersCreateModel>();
 
@@ -99,12 +99,71 @@ namespace ShopApp.Percistence.Repositories.Customers
             return result;
         }
 
-        public async Task<OperationResult<CustomersDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user)
+        public async Task<OperationResult<CustomersDeleteModel>> DeleteCustmersByIdAsync(int id, int delete_user)
         {
-            throw new NotImplementedException();
+            OperationResult<CustomersDeleteModel> result = new OperationResult<CustomersDeleteModel>();
+
+            try
+            {
+                _logger.LogInformation("Procesando desactivacion de cliente");
+
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    using (var command = new SqlCommand("SP_EliminarCustomer", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@custid", id);
+                        command.Parameters.AddWithValue("@delete_user", delete_user);
+
+
+
+                        SqlParameter v_result = new SqlParameter("@result", System.Data.SqlDbType.VarChar)
+                        {
+                            Size = 1000,
+                            Direction = System.Data.ParameterDirection.Output
+                        };
+                        command.Parameters.Add(v_result);
+
+                        await connection.OpenAsync();
+
+
+                        var rowsAffected = await command.ExecuteNonQueryAsync();
+                        var resultMessage = v_result.Value.ToString();
+
+
+                        if (rowsAffected > 0)
+                        {
+
+                            _logger.LogInformation($"Cliente desactivada con exito");
+
+                            var CustomerDeleteModel = new CustomersDeleteModel
+                            {
+                                custid = id,
+                                delete_user = delete_user
+                            };
+                            
+
+                            result = OperationResult<CustomersDeleteModel>.Succes("Cliente desactivado con exito.", CustomerDeleteModel);
+                        }
+                        else
+                        {
+
+                            _logger.LogWarning($"Error al desactivar el cliente");
+                            result = OperationResult<CustomersDeleteModel>.Failure("Error al desactivar el cliente");
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error al desactivar el cliente");
+                result = OperationResult<CustomersDeleteModel>.Failure($"Erro {ex.Message}");
+            }
+            return result;
         }
 
-        public async Task<OperationResult<List<CustomersGetModel>>> GetAllCategoriaAsync()
+        public async Task<OperationResult<List<CustomersGetModel>>> GetAllCustmersAsync()
         {
             OperationResult<List<CustomersGetModel>> result = new OperationResult<List<CustomersGetModel>>();
             try
@@ -128,7 +187,7 @@ namespace ShopApp.Percistence.Repositories.Customers
                                 {
                                     custid = reader.GetInt32(reader.GetOrdinal("custid")),
                                     companyname = reader.GetString(reader.GetOrdinal("companyname")),
-                                    contactname = reader.GetString(reader.GetOrdinal("contectname")),
+                                    contactname = reader.GetString(reader.GetOrdinal("contactname")),
                                     contacttitle = reader.GetString(reader.GetOrdinal("contacttitle")),
                                     address = reader.GetString(reader.GetOrdinal("address")),
                                     email = reader.GetString(reader.GetOrdinal("email")),
@@ -165,7 +224,7 @@ namespace ShopApp.Percistence.Repositories.Customers
             return result;
         }
 
-        public async Task<OperationResult<CustomersGetModel>> GetCategoriaByIdAsync(int id)
+        public async Task<OperationResult<CustomersGetModel>> GetCustmersByIdAsync(int id)
         {
             OperationResult<CustomersGetModel> result = new OperationResult<CustomersGetModel>();
             try
@@ -174,10 +233,10 @@ namespace ShopApp.Percistence.Repositories.Customers
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var command = new SqlCommand("", connection))
+                    using (var command = new SqlCommand("SP_ObtenerCustomerbyId", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@", id);
+                        command.Parameters.AddWithValue("@custid", id);
 
                         await connection.OpenAsync();
 
@@ -191,7 +250,7 @@ namespace ShopApp.Percistence.Repositories.Customers
                                 {
                                     CustomerFount.custid = reader.GetInt32(reader.GetOrdinal("custid"));
                                     CustomerFount.companyname = reader.GetString(reader.GetOrdinal("companyname"));
-                                    CustomerFount.contactname = reader.GetString(reader.GetOrdinal("contectname"));
+                                    CustomerFount.contactname = reader.GetString(reader.GetOrdinal("contactname"));
                                     CustomerFount.contacttitle = reader.GetString(reader.GetOrdinal("contacttitle"));
                                     CustomerFount.address = reader.GetString(reader.GetOrdinal("address"));
                                     CustomerFount.email = reader.GetString(reader.GetOrdinal("email"));
@@ -223,7 +282,7 @@ namespace ShopApp.Percistence.Repositories.Customers
             return result;
         }
 
-        public async Task<OperationResult<CustomersUpdateModel>> UpdateCategoria(CustomersUpdateModel model)
+        public async Task<OperationResult<CustomersUpdateModel>> UpdateCustmersAsync(CustomersUpdateModel model)
         {
             OperationResult<CustomersUpdateModel> result = new OperationResult<CustomersUpdateModel>();
 
@@ -236,6 +295,7 @@ namespace ShopApp.Percistence.Repositories.Customers
                     using (var command = new SqlCommand("SP_ActualizarCustomer", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@custid", model.custid);
                         command.Parameters.AddWithValue("@companyname", model.companyname);
                         command.Parameters.AddWithValue("@contactname", model.contactname);
                         command.Parameters.AddWithValue("@contacttitle", model.contacttitle);
@@ -268,6 +328,7 @@ namespace ShopApp.Percistence.Repositories.Customers
                             _logger.LogInformation($"Cliente actualizado satisfactoriamente. Resultado: {resultMessage} ");
                             var CustomerUpdateeModel = new CustomersUpdateModel
                             {
+                                custid = model.custid,
                                 companyname = model.companyname,
                                 contactname = model.contactname,
                                 contacttitle = model.contacttitle,

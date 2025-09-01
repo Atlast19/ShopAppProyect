@@ -2,7 +2,7 @@
 using ShopApp.Application.Interface.Categoria;
 using ShopApp.Domain.Models.Categoria;
 
-namespace ShopApp.pressent.Controllers
+namespace ShopApp.pressent.Controllers.CategoriaController
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,7 +15,7 @@ namespace ShopApp.pressent.Controllers
         }
 
         // GET: api/<CategoriaController>
-        [HttpGet("GetAll")]
+        [HttpGet("GetAllCategorias")]
         public async Task<IActionResult> Get()
         {
             var result = await _categoriaService.GetAllCategoriaAsync();
@@ -29,7 +29,7 @@ namespace ShopApp.pressent.Controllers
         }
 
         // GET api/<CategoriaController>/5
-        [HttpGet("GetByID")]
+        [HttpGet("GetCategoriaByID")]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _categoriaService.GetCategoriaByIdAsync(id);
@@ -42,7 +42,7 @@ namespace ShopApp.pressent.Controllers
         }
 
         // POST api/<CategoriaController>
-        [HttpPost("PostCategoria")]
+        [HttpPost("CreateCategoria")]
         public async Task<IActionResult> Post([FromBody] CategoriaCreateModel CreationModel)
         {
             var result = await _categoriaService.CreateCategoriaAsync(CreationModel);
@@ -71,7 +71,7 @@ namespace ShopApp.pressent.Controllers
         [HttpDelete("DeleteCategoria")]
         public async Task<IActionResult> Delete(int id, int delete_user)
         {
-            var result = await _categoriaService.DeleteCategoriaByIdAsync(id,delete_user);
+            var result = await _categoriaService.DeleteCategoriaByIdAsync(id, delete_user);
 
             if (!result.IsSucces)
                 return BadRequest(result);

@@ -13,29 +13,29 @@ namespace ShopApp.Application.Service.CustomerService
         {
             _customersRepository = customersRepository;
         }
-        public async Task<OperationResult<CustomersCreateModel>> CreateCategoriaAsync(CustomersCreateModel model)
+        public async Task<OperationResult<CustomersCreateModel>> CreateCustmersAsync(CustomersCreateModel model)
         {
-            return await _customersRepository.CreateCategoriaAsync(model);
+            return await _customersRepository.CreateCustmersAsync(model);
         }
 
-        public async  Task<OperationResult<CustomersDeleteModel>> DeleteCategoriaByIdAsync(int id, int delete_user)
+        public async  Task<OperationResult<CustomersDeleteModel>> DeleteCustmersByIdAsync(int id, int delete_user)
         {
-            return await _customersRepository.DeleteCategoriaByIdAsync(id, delete_user);
+            return await _customersRepository.DeleteCustmersByIdAsync(id, delete_user);
         }
 
-        public async Task<OperationResult<List<CustomersGetModel>>> GetAllCategoriaAsync()
+        public async Task<OperationResult<List<CustomersGetModel>>> GetAllCustmersAsync()
         {
-            return await _customersRepository.GetAllCategoriaAsync();
+            return await _customersRepository.GetAllCustmersAsync();
         }
 
-        public async Task<OperationResult<CustomersGetModel>> GetCategoriaByIdAsync(int id)
+        public async Task<OperationResult<CustomersGetModel>> GetCustmersByIdAsync(int id)
         {
-            return await _customersRepository.GetCategoriaByIdAsync(id);
+            return await _customersRepository.GetCustmersByIdAsync(id);
         }
 
-        public async Task<OperationResult<CustomersUpdateModel>> UpdateCategoria(CustomersUpdateModel model)
+        public async Task<OperationResult<CustomersUpdateModel>> UpdateCustmersAsync(CustomersUpdateModel model)
         {
-            return await _customersRepository.UpdateCategoria(model);
+            return await _customersRepository.UpdateCustmersAsync(model);
         }
     }
 }
