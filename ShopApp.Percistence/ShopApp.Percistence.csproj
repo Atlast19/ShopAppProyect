@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Repositories\Base\" />
-    <Folder Include="Repositories\Products\" />
     <Folder Include="Repositories\Shippers\" />
     <Folder Include="Repositories\Suppliers\" />
   </ItemGroup>

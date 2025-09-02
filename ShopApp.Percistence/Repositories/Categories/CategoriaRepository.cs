@@ -278,7 +278,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
                         if (rowsAffected > 0)
                         {
 
-                            _logger.LogInformation($"Categoria actualizada con exito");
+                            _logger.LogInformation($"Categoria desactivada con exito");
 
                             var categoriaDelete = new CategoriaDeleteModel
                             {
@@ -286,13 +286,13 @@ namespace ShopApp.Percistence.Repositories.Categoria
                                 delete_user = delete_user
                             };
 
-                            result = OperationResult<CategoriaDeleteModel>.Succes("Department updated successfully.", categoriaDelete);
+                            result = OperationResult<CategoriaDeleteModel>.Succes("Categoria desactivada correctamente.", categoriaDelete);
                         }
                         else
                         {
 
-                            _logger.LogWarning($"Error al actualizar la categoria");
-                            result = OperationResult<CategoriaDeleteModel>.Failure("Error al cargar la categoria");
+                            _logger.LogWarning($"Error al desactivar la categoria");
+                            result = OperationResult<CategoriaDeleteModel>.Failure("Error al desactivar la categoria");
                         }
 
                     }
