@@ -183,7 +183,6 @@ namespace ShopApp.Percistence.Repositories.Categoria
         }
         public async Task<OperationResult<CategoriaUpdateModel>> UpdateCategoria(CategoriaUpdateModel model)
         {
-
             OperationResult<CategoriaUpdateModel> result = new OperationResult<CategoriaUpdateModel>();
 
             try

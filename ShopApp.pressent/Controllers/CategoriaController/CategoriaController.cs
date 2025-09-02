@@ -55,7 +55,7 @@ namespace ShopApp.pressent.Controllers.CategoriaController
         }
 
         // PUT api/<CategoriaController>/5
-        [HttpPut("PutCategoria")]
+        [HttpPut("UpdateCategoria")]
         public async Task<IActionResult> Put([FromBody] CategoriaUpdateModel UpdateModel)
         {
             var result = await _categoriaService.UpdateCategoria(UpdateModel);
