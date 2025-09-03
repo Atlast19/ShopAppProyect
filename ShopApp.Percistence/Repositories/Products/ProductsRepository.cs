@@ -18,7 +18,7 @@ namespace ShopApp.Percistence.Repositories.Products
             _logger = logger;
             _connectionString = _configuration.GetConnectionString("StringConection");
         }
-        public async Task<OperationResult<ProductsCreateModel>> CreateOrderDetailsAsync(ProductsCreateModel model)
+        public async Task<OperationResult<ProductsCreateModel>> CreateProductsAsync(ProductsCreateModel model)
         {
             OperationResult<ProductsCreateModel> result = new OperationResult<ProductsCreateModel>();
 
@@ -85,7 +85,7 @@ namespace ShopApp.Percistence.Repositories.Products
             return result;
         }
 
-        public async Task<OperationResult<ProductsDeleteModel>> DeleteOrderDetailsByIdAsync(int id, int delete_user)
+        public async Task<OperationResult<ProductsDeleteModel>> DeleteProductsByIdAsync(int id, int delete_user)
         {
             OperationResult<ProductsDeleteModel> result = new OperationResult<ProductsDeleteModel>();
 
@@ -149,19 +149,180 @@ namespace ShopApp.Percistence.Repositories.Products
             return result;
         }
 
-        public Task<OperationResult<List<ProductsGetModel>>> GetAllOrderDetailsAsync()
+        public async Task<OperationResult<List<ProductsGetModel>>> GetAllProductsAsync()
         {
-            throw new NotImplementedException();
+            OperationResult<List<ProductsGetModel>> result = new OperationResult<List<ProductsGetModel>>();
+            try
+            {
+                _logger.LogInformation("Cargando los productos");
+
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    using (var commad = new SqlCommand("SP_ObtenerProducts", connection))
+                    {
+                        commad.CommandType = System.Data.CommandType.StoredProcedure;
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await commad.ExecuteReaderAsync())
+                        {
+                            var GetProductos = new List<ProductsGetModel>();
+
+                            while (await reader.ReadAsync())
+                            {
+                                var products = new ProductsGetModel
+                                {
+                                    productid = reader.GetInt32(reader.GetOrdinal("productid")),
+                                    productname = reader.GetString(reader.GetOrdinal("productname")),
+                                    supplierid = reader.GetInt32(reader.GetOrdinal("supplierid")),
+                                    categoryid = reader.GetInt32(reader.GetOrdinal("categoryid")),
+                                    unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice")),
+                                    discountinued = reader.GetBoolean(reader.GetOrdinal("discountinued")),
+                                    creation_user = reader.GetInt32(reader.GetOrdinal("creation_user")),
+                                    creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date"))
+                                };
+
+                                GetProductos.Add(products);
+                            }
+
+                            if (GetProductos.Any())
+                            {
+                                result = OperationResult<List<ProductsGetModel>>.Succes("productos cargados sin problemas", GetProductos);
+                            }
+                            else
+                            {
+                                result = result = OperationResult<List<ProductsGetModel>>.Failure("No se pudieron cargar todos los productos");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error al cargar los productos");
+                result = OperationResult<List<ProductsGetModel>>.Failure($"Error al cargar los productos: {ex.Message}");
+            }
+            return result;
         }
 
-        public Task<OperationResult<ProductsGetModel>> GetOrderDetailsByIdAsync(int id)
+        public async Task<OperationResult<ProductsGetModel>> GetProductsByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            OperationResult<ProductsGetModel> result = new OperationResult<ProductsGetModel>();
+            try
+            {
+                _logger.LogInformation("Cargando productos por ID");
+
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    using (var command = new SqlCommand("SP_ObtenerProductsById", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@productid", id);
+
+                        await connection.OpenAsync();
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
+                                ProductsGetModel ProductsFound = new ProductsGetModel();
+
+                                while (await reader.ReadAsync())
+                                {
+                                    ProductsFound.productid = reader.GetInt32(reader.GetOrdinal("productid"));
+                                    ProductsFound.productname = reader.GetString(reader.GetOrdinal("productname"));
+                                    ProductsFound.supplierid = reader.GetInt32(reader.GetOrdinal("supplierid"));
+                                    ProductsFound.categoryid = reader.GetInt32(reader.GetOrdinal("categoryid"));
+                                    ProductsFound.unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice"));
+                                    ProductsFound.discountinued = reader.GetBoolean(reader.GetOrdinal("discountinued"));
+                                    ProductsFound.creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date"));
+                                    ProductsFound.creation_user = reader.GetInt32(reader.GetOrdinal("creation_user"));
+                                }
+
+                                result = OperationResult<ProductsGetModel>.Succes("producto por ID cargada correctamente", ProductsFound);
+                            }
+                            else
+                            {
+                                result = OperationResult<ProductsGetModel>.Failure("No se encontraron datos al cargar el producto");
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Error al buscar el producto por ID");
+                result = OperationResult<ProductsGetModel>.Failure($"Error al cargar el producto por ID {ex.Message}");
+            }
+            return result;
         }
 
-        public Task<OperationResult<ProductsUpdateModel>> UpdateOrderDetails(ProductsUpdateModel model)
+        public async Task<OperationResult<ProductsUpdateModel>> UpdateProducts(ProductsUpdateModel model)
         {
-            throw new NotImplementedException();
+            OperationResult<ProductsUpdateModel> result = new OperationResult<ProductsUpdateModel>();
+
+            try
+            {
+                _logger.LogInformation("Actualizando los productos");
+
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    using (var command = new SqlCommand("SP_ActualizarProducts", connection))
+                    {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@productid", model.productid);
+                        command.Parameters.AddWithValue("@productname", model.productname);
+                        command.Parameters.AddWithValue("@supplierid", model.supplierid);
+                        command.Parameters.AddWithValue("@categoryid", model.categoryid);
+                        command.Parameters.AddWithValue("@unitprice", model.unitprice);
+                        command.Parameters.AddWithValue("@modify_user", model.modify_user);
+
+
+                        SqlParameter v_result = new SqlParameter("@result", System.Data.SqlDbType.VarChar)
+                        {
+                            Size = 1000,
+                            Direction = System.Data.ParameterDirection.Output
+                        };
+
+                        command.Parameters.Add(v_result);
+
+                        await connection.OpenAsync();
+
+                        var rowsAffected = await command.ExecuteNonQueryAsync();
+                        var resultMessage = v_result.Value.ToString();
+
+
+                        if (rowsAffected > 0)
+                        {
+
+                            _logger.LogInformation($"producto actualizado con exito");
+                            var products = new ProductsUpdateModel
+                            {
+                                productid = model.productid,
+                                productname = model.productname,
+                                supplierid = model.supplierid,
+                                categoryid = model.categoryid,
+                                unitprice = model.unitprice,
+                                modify_user = model.modify_user
+                            };
+
+                            result = OperationResult<ProductsUpdateModel>.Succes("Producto actualizado con exito", model);
+                        }
+                        else
+                        {
+
+                            _logger.LogWarning($"Error al actualizar el producto");
+                            result = OperationResult<ProductsUpdateModel>.Failure("Error al actualizar el producto");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "no se pudo actualizar el producto");
+                result = OperationResult<ProductsUpdateModel>.Failure($"Error al actualizar el producto {ex.Message}");
+            }
+            return result;
         }
     }
 }
