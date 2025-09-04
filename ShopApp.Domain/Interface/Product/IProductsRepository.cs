@@ -1,7 +1,4 @@
-﻿
-
-
-using ShopApp.Domain.Base;
+﻿using ShopApp.Domain.Base;
 using ShopApp.Domain.Models.Products;
 
 namespace ShopApp.Domain.Interface.Product
@@ -11,7 +8,7 @@ namespace ShopApp.Domain.Interface.Product
         Task<OperationResult<ProductsCreateModel>> CreateProductsAsync(ProductsCreateModel model);
         Task<OperationResult<List<ProductsGetModel>>> GetAllProductsAsync();
         Task<OperationResult<ProductsGetModel>> GetProductsByIdAsync(int id);
-        Task<OperationResult<ProductsDeleteModel>> DeleteProductsByIdAsync(int id, int modify_user);
+        Task<OperationResult<ProductsDeleteModel>> DeleteProductsByIdAsync(int id, int delete_user);
         Task<OperationResult<ProductsUpdateModel>> UpdateProducts(ProductsUpdateModel model);
     }
 }

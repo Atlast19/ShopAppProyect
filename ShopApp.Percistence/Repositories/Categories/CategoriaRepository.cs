@@ -120,7 +120,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
                             }
                             else 
                             {
-                                result = result = OperationResult<List<CategoriaGetModel>>.Failure("No se pudieron cargar todas las categorias ");
+                                result = result = OperationResult<List<CategoriaGetModel>>.Failure("No se pudieron cargar todas las categorias");
                             }
                         }
                     }
@@ -129,7 +129,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
             catch (Exception ex) 
             {
                 _logger.LogInformation("Error al cargar las categorias");
-                result = OperationResult<List<CategoriaGetModel>>.Failure($"Error al cargar las categorias{ex.Message}");
+                result = OperationResult<List<CategoriaGetModel>>.Failure($"Error al cargar las categorias: {ex.Message}");
             }
             return result;
         }
@@ -187,7 +187,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
             try
             {
-                _logger.LogInformation("Actualizando la entidad Categoria");
+                _logger.LogInformation("Actualizando la Categoria");
 
                 using (var connection = new SqlConnection(_connectionString)) 
                 {
@@ -225,7 +225,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
                                 description = model.description,    
                                 modify_user = model.modify_user
                             };
-                            result = OperationResult<CategoriaUpdateModel>.Succes("Department updated successfully.", model);
+                            result = OperationResult<CategoriaUpdateModel>.Succes("Categoria actualizada correctamente", categorys);
                         }
                         else
                         {
@@ -238,7 +238,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "no se pudo actualizar la categoria");
+                _logger.LogError("no se pudo actualizar la categoria");
                 result = OperationResult<CategoriaUpdateModel>.Failure($"Error al actualizar {ex.Message}");
             }
             return result;
