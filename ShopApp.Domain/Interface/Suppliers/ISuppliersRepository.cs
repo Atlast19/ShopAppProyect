@@ -5,10 +5,10 @@ namespace ShopApp.Domain.Interface.Suppliers
 {
     public interface ISuppliersRepository
     {
-        Task<OperationResult<SuppliersCreateModel>> CreateShippersAsync(SuppliersCreateModel model);
-        Task<OperationResult<List<SuppliersGetModel>>> GetAllShippersAsync();
-        Task<OperationResult<SuppliersGetModel>> GetShippersByIdAsync(int id);
-        Task<OperationResult<SuppliersDeleteModel>> DeleteShippersByIdAsync(int id, int modify_user);
-        Task<OperationResult<SuppliersUpdateModel>> UpdateShippers(SuppliersUpdateModel model);
+        Task<OperationResult<SuppliersCreateModel>> CreateSupplierAsync(SuppliersCreateModel model);
+        Task<OperationResult<List<SuppliersGetModel>>> GetAllSupplierAsync();
+        Task<OperationResult<SuppliersGetModel>> GetSupplierByIdAsync(int id);
+        Task<OperationResult<SuppliersDeleteModel>> DeleteSupplierByIdAsync(int id, int delete_user);
+        Task<OperationResult<SuppliersUpdateModel>> UpdateSupplier(SuppliersUpdateModel model);
     }
 }

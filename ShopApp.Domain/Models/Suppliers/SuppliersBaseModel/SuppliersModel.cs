@@ -9,7 +9,7 @@ namespace ShopApp.Domain.Models.Suppliers.SuppliersBaseModel
         public string contactname { get; set; }
         public string contacttitle { get; set; }
         public string address { get; set; }
-        public string ciry { get; set; }
+        public string city { get; set; }
         public string region { get; set; }
         public string poscalcode { get; set; }
         public string country { get; set; }

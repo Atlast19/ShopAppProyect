@@ -28,7 +28,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
             try
             {
-                _logger.LogInformation($"Creando una Categoria: {model.categoryname}");
+                _logger.LogInformation($"Creando una Categoria");
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
@@ -55,7 +55,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
                         if (RowAffected > 0)
                         {
-                            _logger.LogInformation($"Categoria {model.categoryname} creada satisfactoriamente. Resultado: {resultMessage} ");
+                            _logger.LogInformation($"Categoria creada satisfactoriamente. Resultado: {resultMessage} ");
                             var CategoriaCreateModel = new CategoriaCreateModel
                             {
                                 categoryname = model.categoryname,
@@ -66,7 +66,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
                         }
                         else
                         {
-                            _logger.LogInformation($"No se ha podido crear la categoria {model.categoryname}. Resultado{resultMessage}");
+                            _logger.LogInformation($"No se ha podido crear la categoria. Resultado{resultMessage}");
                             result = OperationResult<CategoriaCreateModel>.Failure("no se ha podido crear la categoria");
 
                         }
@@ -77,8 +77,8 @@ namespace ShopApp.Percistence.Repositories.Categoria
             }
             catch (Exception ex) 
             {
-                _logger.LogInformation($"Error creando la categoria: {model.categoryname}");
-                result = OperationResult<CategoriaCreateModel>.Failure($"Error Creando la Categoria {ex.Message}");
+                _logger.LogInformation($"Error creando la categoria");
+                result = OperationResult<CategoriaCreateModel>.Failure($"Error creando la Categoria {ex.Message}");
             }
             return result;
         }
