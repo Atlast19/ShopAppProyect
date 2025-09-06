@@ -11,7 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interface\Employees\" />
+    <Folder Include="Interface\Products\" />
+    <Folder Include="Interface\Suppliers\" />
+    <Folder Include="Interface\Shippers\" />
     <Folder Include="Interface\Order\" />
+    <Folder Include="Service\EmployeesService\" />
+    <Folder Include="Service\ProductsService\" />
+    <Folder Include="Service\SupplierService\" />
+    <Folder Include="Service\ShipperService\" />
     <Folder Include="Service\OrderService\" />
   </ItemGroup>
 

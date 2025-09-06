@@ -5,10 +5,10 @@ namespace ShopApp.Domain.Interface
 {
     public interface IOrderRepository 
     {
-        Task<OperationResult<OrderModel>> CreateCategoriaAsync(OrderModel model);
-        Task<OperationResult<List<OrderModel>>> GetAllCategoriaAsync();
-        Task<OperationResult<OrderModel>> GetCategoriaByIdAsync(int id);
-        Task<OperationResult<OrderModel>> DeleteCategoriaByIdAsync(int id, int delete_user);
-        Task<OperationResult<OrderModel>> UpdateCategoria(OrderModel model);
+        Task<OperationResult<OrderModel>> CreateOrderAsync(OrderModel model);
+        Task<OperationResult<List<OrderModel>>> GetAllOrderAsync();
+        Task<OperationResult<OrderModel>> GetOrderByIdAsync(int id);
+        Task<OperationResult<OrderModel>> DeleteOrderByIdAsync(int id, int delete_user);
+        Task<OperationResult<OrderModel>> UpdateOrder(OrderModel model);
     }
 }

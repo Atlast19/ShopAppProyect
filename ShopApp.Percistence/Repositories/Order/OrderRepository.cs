@@ -10,27 +10,27 @@ namespace ShopApp.Percistence.Repositories.Order
 {
     public class OrderRepository : IOrderRepository
     {
-        public Task<OperationResult<OrderModel>> CreateCategoriaAsync(OrderModel model)
+        public Task<OperationResult<OrderModel>> CreateOrderAsync(OrderModel model)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<OrderModel>> DeleteCategoriaByIdAsync(int id, int delete_user)
+        public Task<OperationResult<OrderModel>> DeleteOrderByIdAsync(int id, int delete_user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<List<OrderModel>>> GetAllCategoriaAsync()
+        public Task<OperationResult<List<OrderModel>>> GetAllOrderAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<OrderModel>> GetCategoriaByIdAsync(int id)
+        public Task<OperationResult<OrderModel>> GetOrderByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult<OrderModel>> UpdateCategoria(OrderModel model)
+        public Task<OperationResult<OrderModel>> UpdateOrder(OrderModel model)
         {
             throw new NotImplementedException();
         }
