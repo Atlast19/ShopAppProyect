@@ -8,7 +8,7 @@ using ShopApp.Domain.Models.Employees;
 
 namespace ShopApp.Percistence.Repositories.Employees
 {
-    internal class EmployeesRepository : IEmployeesRepository
+    public class EmployeesRepository : IEmployeesRepository
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<EmployeesRepository> _logger;
@@ -35,7 +35,7 @@ namespace ShopApp.Percistence.Repositories.Employees
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@lastname", model.lastname);
-                        command.Parameters.AddWithValue("@description", model.firstname);
+                        command.Parameters.AddWithValue("@firstname", model.firstname);
                         command.Parameters.AddWithValue("@title", model.title);
                         command.Parameters.AddWithValue("@titleofcourtesy", model.titleofcourtesy);
                         command.Parameters.AddWithValue("@birthdate", model.birthdate);
@@ -46,7 +46,6 @@ namespace ShopApp.Percistence.Repositories.Employees
                         command.Parameters.AddWithValue("@postlcode", model.postalcode);
                         command.Parameters.AddWithValue("@country", model.country);
                         command.Parameters.AddWithValue("@phone", model.phone);
-                        command.Parameters.AddWithValue("@mgrid", model.mgrid);
                         command.Parameters.AddWithValue("@creation_user", model.creation_user);
 
 
@@ -81,7 +80,6 @@ namespace ShopApp.Percistence.Repositories.Employees
                                 postalcode = model.postalcode,
                                 country = model.country,
                                 phone = model.phone,
-                                mgrid = model.mgrid,
                                 creation_user = model.creation_user
 
                             };
@@ -179,7 +177,7 @@ namespace ShopApp.Percistence.Repositories.Employees
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var commad = new SqlCommand("SP_AgregarEmployees", connection))
+                    using (var commad = new SqlCommand("SP_ObtenerEmployees", connection))
                     {
                         commad.CommandType = System.Data.CommandType.StoredProcedure;
                         await connection.OpenAsync();
@@ -205,7 +203,7 @@ namespace ShopApp.Percistence.Repositories.Employees
                                     postalcode = reader.GetString(reader.GetOrdinal("postalcode")),
                                     country = reader.GetString(reader.GetOrdinal("country")),
                                     phone = reader.GetString(reader.GetOrdinal("phone")),
-                                    mgrid = reader.GetInt32(reader.GetOrdinal("mgrid")),
+                                    mgrid = reader.IsDBNull(reader.GetOrdinal("mgrid")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("mgrid")),
                                     creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date")),
                                     creation_user = reader.GetInt32(reader.GetOrdinal("creation_user"))
                                 };

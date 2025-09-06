@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using ShopApp.Application.Interface.Shippers;
+using ShopApp.Domain.Models.Shippers;
 
 namespace ShopApp.pressent.Controllers.ShippersController
 {
@@ -8,36 +8,75 @@ namespace ShopApp.pressent.Controllers.ShippersController
     [ApiController]
     public class ShippersController : ControllerBase
     {
+        private readonly IShippersService _shippersService;
+
+        public ShippersController(IShippersService shippersService)
+        {
+            _shippersService = shippersService;
+        }
         // GET: api/<ShippersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _shippersService.GetAllShippersAsync();
+
+            if (!result.IsSucces)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
         // GET api/<ShippersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            var result = await _shippersService.GetShippersByIdAsync(id);
+
+            if (!result.IsSucces)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
         // POST api/<ShippersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] ShippersCreateModel model)
         {
+            var result = await _shippersService.CreateShippersAsync(model);
+
+            if (!result.IsSucces)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
         // PUT api/<ShippersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromBody] ShippersUpdateModel model)
         {
+            var result = await _shippersService.UpdateShippers(model);
+
+            if (!result.IsSucces)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
         // DELETE api/<ShippersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id,int delete_user)
         {
+            var result = await _shippersService.DeleteShippersByIdAsync(id, delete_user);
+
+            if (!result.IsSucces)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
     }
 }

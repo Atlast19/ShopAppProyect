@@ -17,6 +17,6 @@ namespace ShopApp.Domain.Models.Employees.EmployeesBaseModel
         public string postalcode { get; set; }
         public string country { get; set; }
         public string phone { get; set; }
-        public int mgrid { get; set; }
+        public int? mgrid { get; set; }
     }
 }

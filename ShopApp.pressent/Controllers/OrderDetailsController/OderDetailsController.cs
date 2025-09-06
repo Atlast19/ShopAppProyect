@@ -2,8 +2,6 @@
 using ShopApp.Application.Interface.OrderDetails;
 using ShopApp.Domain.Models.OrderDetails.OrderDetailsBaseModel;
 
-
-
 namespace ShopApp.pressent.Controllers.OrderDetailsController
 {
     [Route("api/[controller]")]

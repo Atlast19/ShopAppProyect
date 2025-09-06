@@ -2,8 +2,6 @@
 using ShopApp.Application.Interface.Customers;
 using ShopApp.Domain.Models.Customers;
 
-
-
 namespace ShopApp.pressent.Controllers.CustomerController
 {
     [Route("api/[controller]")]

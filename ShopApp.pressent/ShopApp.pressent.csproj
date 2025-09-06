@@ -14,10 +14,4 @@
     <ProjectReference Include="..\ShopApp.Application\ShopApp.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\EmployeeController\" />
-    <Folder Include="Controllers\ProductsController\" />
-    <Folder Include="Controllers\SupplierController\" />
-  </ItemGroup>
-
 </Project>
