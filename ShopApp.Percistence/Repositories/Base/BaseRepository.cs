@@ -16,7 +16,7 @@ namespace ShopApp.Percistence.Repositories.Base
         }
         public async Task AddAsync(TEntity entity)
         {
-            await _DbSet.AddAsync(entity);
+            await _DbSet.ToListAsync();
             await context.SaveChangesAsync();
         }
 
@@ -36,8 +36,9 @@ namespace ShopApp.Percistence.Repositories.Base
             return new OperationResult<TModel>(true,"Datos Cargados correctamente",result);
         }
 
-        public Task<TModel?> GetByIdAsync(int id)
+        public async Task<TModel?> GetByIdAsync(int id)
         {
+
             throw new NotImplementedException();
         }
 
