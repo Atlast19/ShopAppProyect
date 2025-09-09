@@ -8,7 +8,7 @@ namespace ShopApp.Domain.Interface
         Task<OperationResult<OrderModel>> CreateOrderAsync(OrderModel model);
         Task<OperationResult<List<OrderModel>>> GetAllOrderAsync();
         Task<OperationResult<OrderModel>> GetOrderByIdAsync(int id);
-        Task<OperationResult<OrderModel>> DeleteOrderByIdAsync(int id, int delete_user);
+        Task<OperationResult<OrderModel>> DeleteOrderByIdAsync(int id);
         Task<OperationResult<OrderModel>> UpdateOrder(OrderModel model);
     }
 }

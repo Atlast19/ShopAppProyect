@@ -11,6 +11,7 @@ namespace ShopApp.Percistence.Repositories.Categoria
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<CategoriaRepository> _logger;
+
         private readonly string _connectionString;
 
 
@@ -89,18 +90,18 @@ namespace ShopApp.Percistence.Repositories.Categoria
             {
                 _logger.LogInformation("Cargando las Categorias");
 
-                using (var connection = new SqlConnection(_connectionString)) 
+                using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var commad = new SqlCommand("SP_OptenerCategoria", connection)) 
+                    using (var commad = new SqlCommand("SP_OptenerCategoria", connection))
                     {
                         commad.CommandType = System.Data.CommandType.StoredProcedure;
                         await connection.OpenAsync();
 
-                        using (SqlDataReader reader = await commad.ExecuteReaderAsync()) 
+                        using (SqlDataReader reader = await commad.ExecuteReaderAsync())
                         {
                             var category = new List<CategoriaGetModel>();
 
-                            while (await reader.ReadAsync()) 
+                            while (await reader.ReadAsync())
                             {
                                 var categoria = new CategoriaGetModel
                                 {
@@ -116,9 +117,9 @@ namespace ShopApp.Percistence.Repositories.Categoria
 
                             if (category.Any())
                             {
-                                result = OperationResult<List<CategoriaGetModel>>.Succes("Categoria cargada sin problemas",category);
+                                result = OperationResult<List<CategoriaGetModel>>.Succes("Categoria cargada sin problemas", category);
                             }
-                            else 
+                            else
                             {
                                 result = result = OperationResult<List<CategoriaGetModel>>.Failure("No se pudieron cargar todas las categorias");
                             }
