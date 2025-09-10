@@ -15,7 +15,7 @@ namespace ShopApp.pressent.Controllers.SupplierController
             _suppliersService = suppliersService;
         }
         // GET: api/<SuppliersController>
-        [HttpGet]
+        [HttpGet("GetAllSuppliers")]
         public async Task<IActionResult> Get()
         {
             var result = await _suppliersService.GetAllSupplierAsync();
@@ -28,8 +28,8 @@ namespace ShopApp.pressent.Controllers.SupplierController
         }
 
         // GET api/<SuppliersController>/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("GetSuppliersById")]
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _suppliersService.GetSupplierByIdAsync(id);
 
@@ -41,7 +41,7 @@ namespace ShopApp.pressent.Controllers.SupplierController
         }
 
         // POST api/<SuppliersController>
-        [HttpPost]
+        [HttpPost("CreateSuppliers")]
         public async Task<IActionResult> Post([FromBody] SuppliersCreateModel model)
         {
             var result = await _suppliersService.CreateSupplierAsync(model);
@@ -54,7 +54,7 @@ namespace ShopApp.pressent.Controllers.SupplierController
         }
 
         // PUT api/<SuppliersController>/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateSuppliers")]
         public async Task<IActionResult> Put([FromBody] SuppliersUpdateModel model)
         {
             var result = await _suppliersService.UpdateSupplier(model);
@@ -67,7 +67,7 @@ namespace ShopApp.pressent.Controllers.SupplierController
         }
 
         // DELETE api/<SuppliersController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteSuppliers")]
         public async Task<IActionResult> Delete(int id, int delete_user)
         {
             var result = await _suppliersService.DeleteSupplierByIdAsync(id, delete_user);

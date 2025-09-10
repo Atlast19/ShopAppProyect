@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using ShopApp.Domain.Base;
 using ShopApp.Domain.Interface.Shippers;
+using ShopApp.Domain.Models.Categoria;
 using ShopApp.Domain.Models.Shippers;
 
 
@@ -170,11 +171,11 @@ namespace ShopApp.Percistence.Repositories.Shippers
 
                         using (SqlDataReader reader = await commad.ExecuteReaderAsync())
                         {
-                            var shipper = new List<ShippersGetModel>();
+                            var shippers = new List<ShippersGetModel>();
 
                             while (await reader.ReadAsync())
                             {
-                                var shippers = new ShippersGetModel
+                                var shipper = new ShippersGetModel
                                 {
                                     shipperid = reader.GetInt32(reader.GetOrdinal("shipperid")),
                                     name = reader.GetString(reader.GetOrdinal("name")),
@@ -188,12 +189,12 @@ namespace ShopApp.Percistence.Repositories.Shippers
                                     creation_user = reader.GetInt32(reader.GetOrdinal("creation_user"))
                                 };
 
-                                shipper.Add(shippers);
+                                shippers.Add(shipper);
                             }
 
-                            if (shipper.Any())
+                            if (shippers.Any())
                             {
-                                result = OperationResult<List<ShippersGetModel>>.Succes("Transportista cargado sin problemas", shipper);
+                                result = OperationResult<List<ShippersGetModel>>.Succes("Transportista cargado sin problemas", shippers);
                             }
                             else
                             {

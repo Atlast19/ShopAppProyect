@@ -192,7 +192,7 @@ namespace ShopApp.Percistence.Repositories.Suppliers
                                     address = reader.GetString(reader.GetOrdinal("address")),
                                     city = reader.GetString(reader.GetOrdinal("city")),
                                     region = reader.GetString(reader.GetOrdinal("region")),
-                                    poscalcode = reader.GetString(reader.GetOrdinal("poscalcode")),
+                                    poscalcode = reader.GetString(reader.GetOrdinal("postalcode")),
                                     country = reader.GetString(reader.GetOrdinal("country")),
                                     phone = reader.GetString(reader.GetOrdinal("phone")),
                                     fax = reader.GetString(reader.GetOrdinal("fax")),
@@ -247,14 +247,14 @@ namespace ShopApp.Percistence.Repositories.Suppliers
 
                                 while (await reader.ReadAsync())
                                 {
-                                    SupplierFound.supplierid = reader.GetInt32(reader.GetOrdinal("supplierd"));
+                                    SupplierFound.supplierid = reader.GetInt32(reader.GetOrdinal("supplierid"));
                                     SupplierFound.companyname = reader.GetString(reader.GetOrdinal("companyname"));
                                     SupplierFound.contactname = reader.GetString(reader.GetOrdinal("contactname"));
                                     SupplierFound.contacttitle = reader.GetString(reader.GetOrdinal("contacttitle"));
                                     SupplierFound.address = reader.GetString(reader.GetOrdinal("address"));
                                     SupplierFound.city = reader.GetString(reader.GetOrdinal("city"));
                                     SupplierFound.region = reader.GetString(reader.GetOrdinal("region"));
-                                    SupplierFound.poscalcode = reader.GetString(reader.GetOrdinal("poscalcode"));
+                                    SupplierFound.poscalcode = reader.GetString(reader.GetOrdinal("postalcode"));
                                     SupplierFound.country = reader.GetString(reader.GetOrdinal("country"));
                                     SupplierFound.phone = reader.GetString(reader.GetOrdinal("phone"));
                                     SupplierFound.fax = reader.GetString(reader.GetOrdinal("fax"));

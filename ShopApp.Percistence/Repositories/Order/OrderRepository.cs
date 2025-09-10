@@ -31,7 +31,7 @@ namespace ShopApp.Percistence.Repositories.Order
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var command = new SqlCommand("", connection))
+                    using (var command = new SqlCommand("SP_AgregarOrders", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@custid", model.custid);
@@ -113,7 +113,7 @@ namespace ShopApp.Percistence.Repositories.Order
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var command = new SqlCommand("", connection))
+                    using (var command = new SqlCommand("SP_EliminarOrders", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@orderid", id);
@@ -173,7 +173,7 @@ namespace ShopApp.Percistence.Repositories.Order
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var commad = new SqlCommand("", connection))
+                    using (var commad = new SqlCommand("SP_ObtenerOrders", connection))
                     {
                         commad.CommandType = System.Data.CommandType.StoredProcedure;
                         await connection.OpenAsync();
@@ -234,7 +234,7 @@ namespace ShopApp.Percistence.Repositories.Order
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var command = new SqlCommand("", connection))
+                    using (var command = new SqlCommand("SP_ObtenerOrdersById", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@orderid", id);
@@ -293,7 +293,7 @@ namespace ShopApp.Percistence.Repositories.Order
 
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    using (var command = new SqlCommand("", connection))
+                    using (var command = new SqlCommand("SP_ActualizarOrders", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 

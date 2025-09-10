@@ -9,6 +9,6 @@ namespace ShopApp.Domain.Models.Products.ProductsBaseModel
         public int supplierid { get; set; }
         public int categoryid { get; set; }
         public decimal unitprice { get; set; }
-        public bool discountinued { get; set; }
+        public bool discontinued { get; set; }
     }
 }

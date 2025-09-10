@@ -9,7 +9,7 @@ namespace ShopApp.Application.Service.CategoriaService
     public class CategoriaService : ICategoriaService
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        public CategoriaService(ICategoriaRepository categoriaRepository, ILogger<CategoriaService> logger)
+        public CategoriaService(ICategoriaRepository categoriaRepository)
         {
             _categoriaRepository = categoriaRepository;
         }

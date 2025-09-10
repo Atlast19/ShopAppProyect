@@ -256,21 +256,22 @@ namespace ShopApp.Percistence.Repositories.Employees
                                 while (await reader.ReadAsync())
                                 {
                                     EmployeeFound.empid = reader.GetInt32(reader.GetOrdinal("empid"));
-                                    EmployeeFound.lastname = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.firstname = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.title = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.titleofcourtesy = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.birthdate = reader.GetDateTime(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.hiredate = reader.GetDateTime(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.address = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.city = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.region = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.postalcode = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.country = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.phone = reader.GetString(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.mgrid = reader.GetInt32(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.creation_date = reader.GetDateTime(reader.GetOrdinal("categoryid"));
-                                    EmployeeFound.creation_user = reader.GetInt32(reader.GetOrdinal("categoryid"));
+                                    EmployeeFound.lastname = reader.GetString(reader.GetOrdinal("lastname"));
+                                    EmployeeFound.firstname = reader.GetString(reader.GetOrdinal("firstname"));
+                                    EmployeeFound.title = reader.GetString(reader.GetOrdinal("title"));
+                                    EmployeeFound.titleofcourtesy = reader.GetString(reader.GetOrdinal("titleofcourtesy"));
+                                    EmployeeFound.birthdate = reader.GetDateTime(reader.GetOrdinal("birthdate"));
+                                    EmployeeFound.hiredate = reader.GetDateTime(reader.GetOrdinal("hiredate"));
+                                    EmployeeFound.address = reader.GetString(reader.GetOrdinal("address"));
+                                    EmployeeFound.city = reader.GetString(reader.GetOrdinal("city"));
+                                    EmployeeFound.region = reader.GetString(reader.GetOrdinal("region"));
+                                    EmployeeFound.postalcode = reader.GetString(reader.GetOrdinal("postalcode"));
+                                    EmployeeFound.country = reader.GetString(reader.GetOrdinal("country"));
+                                    EmployeeFound.phone = reader.GetString(reader.GetOrdinal("phone"));
+                                    int mgridIndex = reader.GetOrdinal("mgrid");
+                                    EmployeeFound.mgrid = reader.IsDBNull(mgridIndex) ? (int?)null : reader.GetInt32(mgridIndex);
+                                    EmployeeFound.creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date"));
+                                    EmployeeFound.creation_user = reader.GetInt32(reader.GetOrdinal("creation_user"));
 
                                 }
 
@@ -306,9 +307,9 @@ namespace ShopApp.Percistence.Repositories.Employees
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        command.Parameters.AddWithValue("@categoryid", model.empid);
+                        command.Parameters.AddWithValue("@empid", model.empid);
                         command.Parameters.AddWithValue("@lastname", model.lastname);
-                        command.Parameters.AddWithValue("@description", model.firstname);
+                        command.Parameters.AddWithValue("@firstname", model.firstname);
                         command.Parameters.AddWithValue("@title", model.title);
                         command.Parameters.AddWithValue("@titleofcourtesy", model.titleofcourtesy);
                         command.Parameters.AddWithValue("@birthdate", model.birthdate);
@@ -320,7 +321,7 @@ namespace ShopApp.Percistence.Repositories.Employees
                         command.Parameters.AddWithValue("@country", model.country);
                         command.Parameters.AddWithValue("@phone", model.phone);
                         command.Parameters.AddWithValue("@mgrid", model.mgrid);
-                        command.Parameters.AddWithValue("@creation_user", model.modiffy_user);
+                        command.Parameters.AddWithValue("@modify_user", model.modiffy_user);
 
                         SqlParameter v_result = new SqlParameter("@result", System.Data.SqlDbType.VarChar)
                         {

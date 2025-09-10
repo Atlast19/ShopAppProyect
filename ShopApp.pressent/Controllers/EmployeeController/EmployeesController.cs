@@ -15,7 +15,7 @@ namespace ShopApp.pressent.Controllers.EmployeeController
             _employeesService = employeesService;
         }
         // GET: api/<EmployeesController>
-        [HttpGet]
+        [HttpGet("GetEmployees")]
         public async Task<IActionResult> Get()
         {
             var result = await _employeesService.GetAllEmployeesAsync();
@@ -28,8 +28,8 @@ namespace ShopApp.pressent.Controllers.EmployeeController
         }
 
         // GET api/<EmployeesController>/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("GetEmployeesById")]
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _employeesService.GetEmployeesByIdAsync(id);
 
@@ -41,7 +41,7 @@ namespace ShopApp.pressent.Controllers.EmployeeController
         }
 
         // POST api/<EmployeesController>
-        [HttpPost]
+        [HttpPost("CreateEmployees")]
         public async Task<IActionResult> Post([FromBody] EmployeesCreateModel model)
         {
             var result = await _employeesService.CreateEmployeesAsync(model);
@@ -54,7 +54,7 @@ namespace ShopApp.pressent.Controllers.EmployeeController
         }
 
         // PUT api/<EmployeesController>/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateEmployees")]
         public async Task<IActionResult> Put([FromBody] EmployeesUpdateModel model)
         {
             var result = await _employeesService.UpdateEmployees(model);
@@ -67,7 +67,7 @@ namespace ShopApp.pressent.Controllers.EmployeeController
         }
 
         // DELETE api/<EmployeesController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteEmployees")]
         public async Task<IActionResult> Delete(int id, int delete_user)
         {
             var result = await _employeesService.DeleteEmployeesByIdAsync(id,delete_user);

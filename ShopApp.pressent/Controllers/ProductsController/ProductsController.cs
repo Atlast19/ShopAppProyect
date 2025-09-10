@@ -15,7 +15,7 @@ namespace ShopApp.pressent.Controllers.ProductsController
             _productsService = productsService;
         }
         // GET: api/<ProductsController>
-        [HttpGet]
+        [HttpGet("GetAllProducts")]
         public async Task<IActionResult> Get()
         {
             var result = await _productsService.GetAllProductsAsync();
@@ -28,8 +28,8 @@ namespace ShopApp.pressent.Controllers.ProductsController
         }
 
         // GET api/<ProductsController>/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("GetProductsById")]
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await _productsService.GetProductsByIdAsync(id);
 
@@ -41,7 +41,7 @@ namespace ShopApp.pressent.Controllers.ProductsController
         }
 
         // POST api/<ProductsController>
-        [HttpPost]
+        [HttpPost("CreateProducts")]
         public async Task<IActionResult> Post([FromBody] ProductsCreateModel model)
         {
             var result = await _productsService.CreateProductsAsync(model);
@@ -54,7 +54,7 @@ namespace ShopApp.pressent.Controllers.ProductsController
         }
 
         // PUT api/<ProductsController>/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateProducts")]
         public async Task<IActionResult> Put([FromBody] ProductsUpdateModel model)
         {
             var result = await _productsService.UpdateProducts(model);
@@ -67,7 +67,7 @@ namespace ShopApp.pressent.Controllers.ProductsController
         }
 
         // DELETE api/<ProductsController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteProducts")]
         public async Task<IActionResult> Delete(int id, int delete_user)
         {
             var result = await _productsService.DeleteProductsByIdAsync(id, delete_user);

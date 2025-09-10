@@ -110,8 +110,8 @@ namespace ShopApp.Percistence.Repositories.OrderDetails
                                     orderid = reader.GetInt32(reader.GetOrdinal("orderid")),
                                     productid = reader.GetInt32(reader.GetOrdinal("productid")),
                                     unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice")),
-                                    qty = reader.GetInt32(reader.GetOrdinal("qty")),
-                                    discount = reader.GetInt32(reader.GetOrdinal("discount"))
+                                    qty = reader.GetInt16(reader.GetOrdinal("qty")),
+                                    discount = reader.GetDecimal(reader.GetOrdinal("discount"))
                                 };
 
                                 OrderDetails.Add(details);
@@ -162,9 +162,9 @@ namespace ShopApp.Percistence.Repositories.OrderDetails
                                 {
                                     orderDetailsFountd.orderid = reader.GetInt32(reader.GetOrdinal("orderid"));
                                     orderDetailsFountd.productid = reader.GetInt32(reader.GetOrdinal("productid"));
-                                    orderDetailsFountd.unitprice = reader.GetInt32(reader.GetOrdinal("unitprice"));
-                                    orderDetailsFountd.qty = reader.GetInt32(reader.GetOrdinal("qty"));
-                                    orderDetailsFountd.discount = reader.GetInt32(reader.GetOrdinal("discount"));
+                                    orderDetailsFountd.unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice"));
+                                    orderDetailsFountd.qty = reader.GetInt16(reader.GetOrdinal("qty"));
+                                    orderDetailsFountd.discount = reader.GetDecimal(reader.GetOrdinal("discount"));
                                 }
 
                                 result = OperationResult<OrderDetailsModel>.Succes("Detalles de la orden cargados por ID correctamente", orderDetailsFountd);

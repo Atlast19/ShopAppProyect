@@ -176,7 +176,7 @@ namespace ShopApp.Percistence.Repositories.Products
                                     supplierid = reader.GetInt32(reader.GetOrdinal("supplierid")),
                                     categoryid = reader.GetInt32(reader.GetOrdinal("categoryid")),
                                     unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice")),
-                                    discountinued = reader.GetBoolean(reader.GetOrdinal("discountinued")),
+                                    discontinued = reader.GetBoolean(reader.GetOrdinal("discontinued")),
                                     creation_user = reader.GetInt32(reader.GetOrdinal("creation_user")),
                                     creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date"))
                                 };
@@ -233,7 +233,7 @@ namespace ShopApp.Percistence.Repositories.Products
                                     ProductsFound.supplierid = reader.GetInt32(reader.GetOrdinal("supplierid"));
                                     ProductsFound.categoryid = reader.GetInt32(reader.GetOrdinal("categoryid"));
                                     ProductsFound.unitprice = reader.GetDecimal(reader.GetOrdinal("unitprice"));
-                                    ProductsFound.discountinued = reader.GetBoolean(reader.GetOrdinal("discountinued"));
+                                    ProductsFound.discontinued = reader.GetBoolean(reader.GetOrdinal("discontinued"));
                                     ProductsFound.creation_date = reader.GetDateTime(reader.GetOrdinal("creation_date"));
                                     ProductsFound.creation_user = reader.GetInt32(reader.GetOrdinal("creation_user"));
                                 }

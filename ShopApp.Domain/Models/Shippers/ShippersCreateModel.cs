@@ -1,6 +1,4 @@
-﻿
-
-using ShopApp.Domain.Models.Shippers.ShippersBaseModel;
+﻿using ShopApp.Domain.Models.Shippers.ShippersBaseModel;
 
 namespace ShopApp.Domain.Models.Shippers
 {
