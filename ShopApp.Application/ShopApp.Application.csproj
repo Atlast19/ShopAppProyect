@@ -10,9 +10,4 @@
     <ProjectReference Include="..\ShopApp.Percistence\ShopApp.Percistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interface\Order\" />
-    <Folder Include="Service\OrderService\" />
-  </ItemGroup>
-
 </Project>
