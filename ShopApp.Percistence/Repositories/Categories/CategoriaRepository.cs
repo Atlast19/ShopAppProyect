@@ -11,7 +11,6 @@ namespace ShopApp.Percistence.Repositories.Categoria
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<CategoriaRepository> _logger;
-
         private readonly string _connectionString;
 
 

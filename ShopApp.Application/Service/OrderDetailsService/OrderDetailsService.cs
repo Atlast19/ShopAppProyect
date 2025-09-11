@@ -18,9 +18,9 @@ namespace ShopApp.Application.Service.OrderDetailsService
             return await _orderDetailsRepository.CreateOrderDetailsAsync(model);
         }
 
-        public async Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id)
+        public async Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id, int productid)
         {
-            return await _orderDetailsRepository.DeleteOrderDetailsByIdAsync(id);
+            return await _orderDetailsRepository.DeleteOrderDetailsByIdAsync(id, productid);
         }
 
         public async Task<OperationResult<List<OrderDetailsModel>>> GetAllOrderDetailsAsync()

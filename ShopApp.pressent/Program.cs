@@ -29,8 +29,8 @@ using ShopApp.Percistence.Repositories.Customers;
 using ShopApp.Percistence.Repositories.Employees;
 using ShopApp.Percistence.Repositories.Order;
 using ShopApp.Percistence.Repositories.OrderDetails;
-using ShopApp.Percistence.Repositories.Products;
 using ShopApp.Percistence.Repositories.Shippers;
+using ShopApp.Percistence.Repositories.Shippers.Products;
 using ShopApp.Percistence.Repositories.Suppliers;
 
 namespace ShopApp.pressent

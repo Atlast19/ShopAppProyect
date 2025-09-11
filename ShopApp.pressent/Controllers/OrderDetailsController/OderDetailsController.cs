@@ -68,9 +68,9 @@ namespace ShopApp.pressent.Controllers.OrderDetailsController
 
         // DELETE api/<OderDetailsController>/5
         [HttpDelete("DeleteOrderDetails")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int productid)
         {
-            var result = await _orderDetailsService.DeleteOrderDetailsByIdAsync(id);
+            var result = await _orderDetailsService.DeleteOrderDetailsByIdAsync(id, productid);
 
             if (!result.IsSucces)
                 return BadRequest(result);
