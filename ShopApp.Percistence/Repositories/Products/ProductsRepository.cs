@@ -5,7 +5,7 @@ using ShopApp.Domain.Base;
 using ShopApp.Domain.Interface.Product;
 using ShopApp.Domain.Models.Products;
 
-namespace ShopApp.Percistence.Repositories.Shippers.Products
+namespace ShopApp.Percistence.Repositories.Products
 {
     public class ProductsRepository : IProductsRepository
     {
