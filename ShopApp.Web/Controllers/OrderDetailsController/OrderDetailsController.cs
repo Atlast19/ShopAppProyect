@@ -1,27 +1,44 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Interface.OrderDetails;
+using ShopApp.Domain.Models.OrderDetails.OrderDetailsBaseModel;
 
 namespace ShopApp.Web.Controllers.OrderDetailsController
 {
     public class OrderDetailsController : Controller
     {
-        private readonly IOrderDetailsService orderDetailsService;
+        private readonly IOrderDetailsService _orderDetailsService;
 
         public OrderDetailsController(IOrderDetailsService orderDetailsService)
         {
-            this.orderDetailsService = orderDetailsService;
+            _orderDetailsService = orderDetailsService;
         }
         // GET: OrderDetailsController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var result = await _orderDetailsService.GetAllOrderDetailsAsync();
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: OrderDetailsController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var result = await _orderDetailsService.GetOrderDetailsByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: OrderDetailsController/Create
@@ -33,10 +50,17 @@ namespace ShopApp.Web.Controllers.OrderDetailsController
         // POST: OrderDetailsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult>Create(OrderDetailsModel model)
         {
             try
             {
+                var result = await _orderDetailsService.CreateOrderDetailsAsync(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -46,18 +70,33 @@ namespace ShopApp.Web.Controllers.OrderDetailsController
         }
 
         // GET: OrderDetailsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var result = await _orderDetailsService.GetOrderDetailsByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: OrderDetailsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(OrderDetailsModel model)
         {
             try
             {
+                var result = await _orderDetailsService.UpdateOrderDetails(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

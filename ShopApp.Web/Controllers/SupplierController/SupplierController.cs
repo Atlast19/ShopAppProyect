@@ -1,27 +1,44 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Interface.Suppliers;
+using ShopApp.Domain.Models.Suppliers;
 
 namespace ShopApp.Web.Controllers.SupplierController
 {
     public class SupplierController : Controller
     {
-        private readonly ISuppliersService suppliersService;
+        private readonly ISuppliersService _suppliersService;
 
         public SupplierController(ISuppliersService suppliersService)
         {
-            this.suppliersService = suppliersService;
+            _suppliersService = suppliersService;
         }
         // GET: SupplierController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _suppliersService.GetAllSupplierAsync();
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: SupplierController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var result = await _suppliersService.GetSupplierByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: SupplierController/Create
@@ -33,10 +50,18 @@ namespace ShopApp.Web.Controllers.SupplierController
         // POST: SupplierController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(SuppliersCreateModel model)
         {
             try
             {
+                model.creartion_user = 1;
+                var result = await _suppliersService.CreateSupplierAsync(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -46,18 +71,35 @@ namespace ShopApp.Web.Controllers.SupplierController
         }
 
         // GET: SupplierController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var result = await _suppliersService.GetSupplierByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: SupplierController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(SuppliersUpdateModel model)
         {
             try
             {
+                model.modify_user = 1;
+                var result = await _suppliersService.UpdateSupplier(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch

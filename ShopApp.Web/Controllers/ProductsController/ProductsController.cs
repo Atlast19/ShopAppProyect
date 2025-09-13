@@ -1,27 +1,44 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Interface.Products;
+using ShopApp.Domain.Models.Products;
 
 namespace ShopApp.Web.Controllers.ProductsController
 {
     public class ProductsController : Controller
     {
-        private readonly IProductsService productsService;
+        private readonly IProductsService _productsService;
 
         public ProductsController(IProductsService productsService)
         {
-            this.productsService = productsService;
+            _productsService = productsService;
         }
         // GET: ProductsController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var result = await _productsService.GetAllProductsAsync();
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: ProductsController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var result = await _productsService.GetProductsByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // GET: ProductsController/Create
@@ -33,10 +50,18 @@ namespace ShopApp.Web.Controllers.ProductsController
         // POST: ProductsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(ProductsCreateModel model)
         {
             try
             {
+                model.creation_user = 1;
+                var result = await _productsService.CreateProductsAsync(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -46,18 +71,34 @@ namespace ShopApp.Web.Controllers.ProductsController
         }
 
         // GET: ProductsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var result = await _productsService.GetProductsByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: ProductsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(ProductsUpdateModel model)
         {
             try
             {
+                model.modify_user = 1;
+                var result = await _productsService.UpdateProducts(model);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
