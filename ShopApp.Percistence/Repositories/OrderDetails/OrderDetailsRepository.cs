@@ -248,7 +248,7 @@ namespace ShopApp.Percistence.Repositories.OrderDetails
             }
             return result;
         }
-        public async Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id, int productid)
+        public async Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id)
         {
             OperationResult<OrderDetailsModel> result = new OperationResult<OrderDetailsModel>();
 
@@ -262,7 +262,7 @@ namespace ShopApp.Percistence.Repositories.OrderDetails
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@orderid", id);
-                        command.Parameters.AddWithValue("@productid", productid);
+                        
 
                         SqlParameter v_result = new SqlParameter("@result", System.Data.SqlDbType.VarChar)
                         {
@@ -286,7 +286,6 @@ namespace ShopApp.Percistence.Repositories.OrderDetails
                             var OrderDetails = new OrderDetailsModel
                             {
                                 orderid = id,
-                                productid = productid
                             };
 
                             result = OperationResult<OrderDetailsModel>.Succes("Detalles de la orden eliminados", OrderDetails);

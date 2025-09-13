@@ -107,18 +107,34 @@ namespace ShopApp.Web.Controllers.EmployeesController
         }
 
         // GET: EmployeesController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Desactivate(int id)
         {
-            return View();
+            var result = await _employeesService.GetEmployeesByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: EmployeesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id, int delete_user)
         {
             try
             {
+                delete_user = 1;
+                var result = await _employeesService.DeleteEmployeesByIdAsync(id, delete_user);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

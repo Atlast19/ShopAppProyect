@@ -106,18 +106,33 @@ namespace ShopApp.Web.Controllers.OrderDetailsController
         }
 
         // GET: OrderDetailsController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Desactivate(int id, int s)
         {
-            return View();
+            var result = await _orderDetailsService.GetOrderDetailsByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: OrderDetailsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id)
         {
             try
             {
+                var result = await _orderDetailsService.DeleteOrderDetailsByIdAsync(id);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

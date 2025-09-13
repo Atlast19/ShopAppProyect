@@ -107,18 +107,34 @@ namespace ShopApp.Web.Controllers.CustomerController
         }
 
         // GET: CCustomerController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Desactivate(int id)
         {
-            return View();
+            var result = await _customerService.GetCustmersByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: CCustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id, int delete_user)
         {
             try
             {
+                delete_user = 1;
+                var result = await _customerService.DeleteCustmersByIdAsync(id, delete_user);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

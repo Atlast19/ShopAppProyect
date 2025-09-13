@@ -107,18 +107,35 @@ namespace ShopApp.Web.Controllers.ShipperController
         }
 
         // GET: ShippersController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Desactivate(int id)
         {
-            return View();
+            var result = await _shippersService.GetShippersByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: ShippersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id, int delete_user)
         {
             try
             {
+                delete_user = 1;
+                var result = await _shippersService.DeleteShippersByIdAsync(id, delete_user);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch

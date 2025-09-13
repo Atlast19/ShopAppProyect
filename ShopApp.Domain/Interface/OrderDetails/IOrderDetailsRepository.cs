@@ -9,7 +9,7 @@ namespace ShopApp.Domain.Interface.OrderDetails
         Task<OperationResult<OrderDetailsModel>> CreateOrderDetailsAsync(OrderDetailsModel model);
         Task<OperationResult<List<OrderDetailsModel>>> GetAllOrderDetailsAsync();
         Task<OperationResult<OrderDetailsModel>> GetOrderDetailsByIdAsync(int id); 
-        Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id, int productid);
+        Task<OperationResult<OrderDetailsModel>> DeleteOrderDetailsByIdAsync(int id);
         Task<OperationResult<OrderDetailsModel>> UpdateOrderDetails(OrderDetailsModel model);
     }
 }

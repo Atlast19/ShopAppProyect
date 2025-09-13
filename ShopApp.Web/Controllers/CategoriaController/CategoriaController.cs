@@ -109,18 +109,34 @@ namespace ShopApp.Web.Controllers.CategoriaController
         }
 
         // GET: CategoriaController/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Desactivate(int id)
         {
-            return View();
+            var result = await _categoriaService.GetCategoriaByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: CategoriaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id, int delete_user)
         {
             try
             {
+                delete_user = 1;
+                var result = await _categoriaService.DeleteCategoriaByIdAsync(id, delete_user);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

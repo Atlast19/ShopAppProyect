@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopApp.Application.Interface.Suppliers;
 using ShopApp.Domain.Models.Suppliers;
 
@@ -109,18 +108,34 @@ namespace ShopApp.Web.Controllers.SupplierController
         }
 
         // GET: SupplierController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Desactivate(int id)
         {
-            return View();
+            var result = await _suppliersService.GetSupplierByIdAsync(id);
+
+            if (!result.IsSucces)
+            {
+                ViewBag.Error = result.Message;
+                return View();
+            }
+
+            return View(result.Data);
         }
 
         // POST: SupplierController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Desactivate(int id, int delete_user)
         {
             try
             {
+                delete_user = 1;
+                var result = await _suppliersService.DeleteSupplierByIdAsync(id, delete_user);
+
+                if (!result.IsSucces)
+                {
+                    ViewBag.Error = result.Message;
+                    return View();
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
